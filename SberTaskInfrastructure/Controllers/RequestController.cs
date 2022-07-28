@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SberTaskInfrastructure.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/request")]
     [ApiController]
     public class RequestController : ControllerBase
     {
@@ -21,6 +21,14 @@ namespace SberTaskInfrastructure.Controllers
         public String AuthorizedMethod()
         {
             return "authorized";
+        }
+
+        [Authorize(Roles = "Admin")]
+        [Route("/authorizedMethodAdmin")]
+        [HttpGet]
+        public String AuthorizedMethodAdmin()
+        {
+            return "authorized for Admins";
         }
     }
 }

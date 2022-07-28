@@ -1,10 +1,11 @@
 ﻿using SberTaskInfrastructure.Models;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace SberTaskInfrastructure.Services
 {
     public interface IUserService
     {
-        Task<ResponseModel> Login(UserLogin userLogin);
-        Task<ResponseModel> Register(UserRegistration userRegistration);
+        Task<ResponseResult<TokenModel>> Login(UserLogin userLogin);
+        Task<ResponseResult> Register(UserRegistration userRegistration);
     }
 }

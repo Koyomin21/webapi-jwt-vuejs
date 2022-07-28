@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using SberTaskInfrastructure.Models;
 using SberTaskInfrastructure.Services;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace SberTaskInfrastructure.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -18,10 +19,30 @@ namespace SberTaskInfrastructure.Controllers
 
         [HttpPost]
         [Route("/login")]
-        public async Task<ResponseModel> Login([FromBody] UserLogin userLogin)
+        public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ResponseResult<TokenModel> responseResult = await _userService.Login(userLogin);
+
+            if(!responseResult.Succeeded)
+            {
+                return BadRequest(responseResult);
+            }
+
+            return Ok(responseResult);
+        }
+
+        [HttpPost]
+        [Route("/register")]
+        public async Task<ResponseResult> Register([FromBody] UserRegistration userRegistration)
         {
 
-            return await _userService.Login(userLogin);
+            return await _userService.Register(userRegistration);
         }
+
     }
 }

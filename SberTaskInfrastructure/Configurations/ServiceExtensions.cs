@@ -11,13 +11,11 @@ namespace SberTaskInfrastructure.Configurations
     {
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentityCore<ApplicationUser>(o => o.User.RequireUniqueEmail = true);
-
-            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), services);
-            builder
+            // For Identity
+            services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            
         }
+
     }
 }
