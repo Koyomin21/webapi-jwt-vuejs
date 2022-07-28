@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SberTaskDLA.Enum
+namespace SberTaskDLA.Enums
 {
-    public enum Roles
+    public enum RequestType
     {
-        Admin,
-        User
+        Sale = 1,
+        Purchase,
+        Auction
     }
 }
