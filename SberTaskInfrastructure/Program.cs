@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SberTaskDLA;
 using SberTaskInfrastructure.Configurations;
-
+using SberTaskInfrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
 
+// services
+builder.Services.AddScoped<IUserService, UserService>();
+
 
 var app = builder.Build();
 
@@ -32,6 +35,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

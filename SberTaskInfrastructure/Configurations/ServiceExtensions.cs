@@ -14,7 +14,9 @@ namespace SberTaskInfrastructure.Configurations
             var builder = services.AddIdentityCore<ApplicationUser>(o => o.User.RequireUniqueEmail = true);
 
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), services);
-            builder.AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            builder
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
             
         }
     }

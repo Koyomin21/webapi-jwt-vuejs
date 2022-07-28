@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SberTaskInfrastructure.Controllers
@@ -12,6 +13,14 @@ namespace SberTaskInfrastructure.Controllers
         public String TestGetMethod()
         {
             return "somethnig";
+        }
+
+        [Authorize]
+        [Route("/authorizedMethod")]
+        [HttpGet]
+        public String AuthorizedMethod()
+        {
+            return "authorized";
         }
     }
 }
